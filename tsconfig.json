@@ -9,6 +9,10 @@
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
     "target": "es2020",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "types": [],
     // For nodejs:
     // "lib": ["esnext"],
