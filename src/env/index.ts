@@ -3,6 +3,8 @@ import { z } from 'zod';
 
 const envSchema = z.object({
   NODE_ENV: z.enum(['dev', 'test', 'production']).default('dev'),
+  DATABASE_URL: z.string().min(1),
+
   PORT: z.coerce.number(), // Se a porta estiver como string, o coerce converte para number()
 });
 

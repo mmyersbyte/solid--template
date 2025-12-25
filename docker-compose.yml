@@ -1,0 +1,16 @@
+services:
+  api-solid-pg:
+    image: bitnamilegacy/postgresql:17.6.0-debian-12-r4
+    container_name: api-solid-pg
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRESQL_USERNAME=docker
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=apisolid
+    volumes:
+      - pg_data:/bitnami/postgresql
+
+volumes:
+  pg_data:
