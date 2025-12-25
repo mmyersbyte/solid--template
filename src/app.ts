@@ -7,6 +7,7 @@ const connectionString = `${process.env.DATABASE_URL}`;
 const adapter = new PrismaPg({ connectionString });
 
 const prisma = new PrismaClient({ adapter });
+export const app = fastify();
 
 prisma.user.create({
   data: {
@@ -14,6 +15,5 @@ prisma.user.create({
     email: 'pedro@gmail.com',
   },
 });
-export const app = fastify();
 
 export { prisma };

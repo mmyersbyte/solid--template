@@ -15,9 +15,42 @@ datasource db {
 
 //apenas um @ configura o campo, dois @@ configuram o model
 model User {
-  id    String @id @default(uuid())
-  name  String
-  email String @unique
+  id            String @id @default(uuid())
+  name          String
+  email         String @unique
+  password_hash String
+
+  created_at DateTime @default(now())
+
+  checkIns CheckIn[] // Um usuário pode ter vários checkIns (relação 1:N) Nao gera nenhum campo na tabela, apenas informa a relação.
 
   @@map("users")
+}
+
+model CheckIn {
+  id String @id @default(uuid())
+
+  created_at   DateTime  @default(now())
+  validated_at DateTime?
+
+  user    User   @relation(fields: [user_id], references: [id]) // Relação com o model User. 
+  user_id String // chamada da chave estrangeira que referencia o id do User
+
+  gym    Gym    @relation(fields: [gym_id], references: [id])
+  gym_id String
+
+  @@map("check_ins")
+}
+
+model Gym {
+  id          String  @id @default(uuid())
+  title       String
+  description String?
+  phone       String?
+  latitude    Decimal
+  longitude   Decimal
+
+  checkIns CheckIn[] // Uma academia pode ter vários checkIns (relação 1:N)
+
+  @@map("gyms")
 }
